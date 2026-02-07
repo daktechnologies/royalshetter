@@ -107,7 +107,7 @@ const Gallery = () => {
   }, { scope: container });
 
   return (
-    <section id="gallery" ref={container} className="py-20 bg-white overflow-hidden">
+    <section id="gallery" ref={container} className="py-20 bg-white overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Title Section - Added opacity-0 to prevent blip */}

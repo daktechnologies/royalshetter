@@ -22,7 +22,7 @@ const Contact = () => {
   }, { scope: container });
 
   return (
-    <section id="contact" ref={container} className="py-20 bg-primary-50">
+    <section id="contact" ref={container} className="py-20 bg-primary-50 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="contact-title text-4xl md:text-5xl font-bold text-secondary-900 mb-6">

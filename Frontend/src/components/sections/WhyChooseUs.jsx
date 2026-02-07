@@ -1,25 +1,8 @@
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Star, MapPin, Award, Settings, Users } from 'lucide-react';
 
 const WhyChooseUs = () => {
-  const container = useRef();
-
-  useGSAP(() => {
-    const tl = gsap.timeline({ 
-      scrollTrigger: {
-        trigger: container.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    tl.from(".why-title", { y: 50, opacity: 0, duration: 0.8 })
-      .from(".why-feature", { scale: 0.9, opacity: 0, duration: 0.5, stagger: 0.15 }, "-=0.4")
-      .from(".why-clients", { y: 30, opacity: 0, duration: 0.6 }, "-=0.2");
-  }, { scope: container });
+  const navigate = useNavigate();
 
   const features = [
     {
@@ -55,7 +38,7 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section id="why-choose-us" ref={container} className="py-20 bg-white">
+    <section id="why-choose-us" className="py-20 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="why-title text-4xl md:text-5xl font-bold text-secondary-900 mb-6">
@@ -87,7 +70,7 @@ const WhyChooseUs = () => {
             Our modular solutions have enhanced operational efficiency on project sites, improved comfort 
             and safety for staff, and provided dependable infrastructure in challenging and remote environments.
           </p>
-          <p className="text-center text-primary-200">
+          <p className="text-center text-white font-semibold">
             Detailed client portfolio, testimonials and case studies are available upon request.
           </p>
         </div>

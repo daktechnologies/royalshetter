@@ -1,25 +1,8 @@
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
+import { useNavigate } from 'react-router-dom';
 import { Award, Users, Target } from 'lucide-react';
 
 const About = () => {
-  const container = useRef();
-
-  useGSAP(() => {
-    const tl = gsap.timeline({ 
-      scrollTrigger: {
-        trigger: container.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    tl.from(".about-title", { y: 50, opacity: 0, duration: 0.8 })
-      .from(".about-content", { y: 30, opacity: 0, duration: 0.6 }, "-=0.4")
-      .from(".about-feature", { scale: 0.9, opacity: 0, duration: 0.5, stagger: 0.2 }, "-=0.3");
-  }, { scope: container });
+  const navigate = useNavigate();
 
   const features = [
     {
@@ -40,7 +23,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" ref={container} className="py-20 bg-white">
+    <section id="about" className="py-20 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="about-title text-4xl md:text-5xl font-bold text-secondary-900 mb-6">

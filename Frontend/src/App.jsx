@@ -8,10 +8,14 @@ import WhyChooseUs from './components/sections/WhyChooseUs';
 import Gallery from './components/sections/Gallery';
 import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
+import Product from './pages/Product';
+import Navbar2 from './components/layout/Navbar2';
+import ScrollToTop from './utils/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <SmoothScroll>
         <Navbar />
         <main>
@@ -24,6 +28,14 @@ function App() {
                 <WhyChooseUs />
                 <Gallery />
                 <Contact />
+                <Footer />
+              </>
+            } />
+            <Route path="/products" element={
+              <>
+              <Navbar2/>
+              <div className="h-16" /> {/* Navbar ke height ke barabar spacer */}
+                <Product />
                 <Footer />
               </>
             } />

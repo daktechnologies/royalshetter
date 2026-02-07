@@ -65,6 +65,7 @@ import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ArrowRight, Building2 } from 'lucide-react';
+import scrollToSection from '../../utils/scrollToSection';
 
 const galleryImages = [
   "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1662_labor-shelters-1-7.jpg&w=1920&q=75",
@@ -88,8 +89,16 @@ const Hero = () => {
 
   /* HERO TEXT ANIMATION */
   useGSAP(() => {
-    gsap.timeline({ defaults: { ease: 'power4.out' } })
-      .from('.hero-title', { y: 100, opacity: 0, duration: 1 })
+    const container = document.querySelector('#home');
+
+    if (!container) {
+      console.error("GSAP target '#home' not found. Ensure the element is rendered.");
+      return;
+    }
+
+    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+
+    tl.from('.hero-title', { y: 100, opacity: 0, duration: 1 })
       .from('.hero-sub', { opacity: 0, y: 20, duration: 0.8 }, '-=0.5')
       .from('.hero-btn', { scale: 0.85, opacity: 0, duration: 0.5 }, '-=0.3')
       .from('.hero-icon', { scale: 0, rotation: 180, duration: 0.8 }, '-=0.2');
@@ -104,15 +113,23 @@ const Hero = () => {
         ease: 'power3.inOut',
         onComplete: () => {
           setIndex((prev) => (prev + 1) % galleryImages.length);
-          gsap.set(sliderRef.current, {
-            xPercent: -((index + 1) % galleryImages.length) * 100,
-          });
+          if (sliderRef.current) {
+            gsap.set(sliderRef.current, {
+              xPercent: -((index + 1) % galleryImages.length) * 100,
+            });
+          }
         },
       });
     }, 4500);
 
     return () => clearInterval(interval);
   }, [index]);
+
+  useEffect(() => {
+  if (window.location.hash) {
+    scrollToSection(window.location.hash.replace("#", ""));
+  }
+}, []);
 
   return (
     <section

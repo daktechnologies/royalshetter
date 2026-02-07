@@ -1,101 +1,104 @@
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { Truck, Home, Warehouse, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Truck, Home, Warehouse, Settings, Check } from 'lucide-react';
 
 const Products = () => {
-  const container = useRef();
-
-  useGSAP(() => {
-    const tl = gsap.timeline({ 
-      scrollTrigger: {
-        trigger: container.current,
-        start: "top 80%",
-        end: "bottom 20%",
-        toggleActions: "play none none reverse"
-      }
-    });
-
-    tl.from(".products-title", { y: 50, opacity: 0, duration: 0.8 })
-      .from(".product-card", { y: 30, opacity: 0, duration: 0.6, stagger: 0.2 }, "-=0.4");
-  }, { scope: container });
+  const navigate = useNavigate();
 
   const products = [
     {
       icon: <Truck size={40} />,
-      title: "Portable Cabins",
-      description: "Mobile, robust, and fully customizable structures engineered for versatility and convenience. Ideal for site offices, staff accommodation, security guardrooms, storage units, and temporary event setups.",
-      features: ["Weather-resistant materials", "Instant deployment", "Perfect blend of functionality and durability"]
-    },
-    {
-      icon: <Home size={40} />,
-      title: "PUF Cabins & Expert Installation",
-      description: "Experience superior thermal insulation and energy efficiency with our advanced Polyurethane Foam (PUF) panel cabins. Engineered for extreme weather conditions.",
-      features: ["Exceptional structural integrity", "Noise reduction", "Professional on-site installation"]
+      title: "Porta Cabins",
+      description: "High-quality portable cabins for offices, living, or site use.",
+      features: ["Custom sizes", "Quick install", "Built to last"],
+      buttonText: "Buy Porta Cabin"
     },
     {
       icon: <Warehouse size={40} />,
-      title: "Luxury Prefab Houses & Farmhouses",
-      description: "Step into the future of modern living with our elegantly designed prefabricated homes and farmhouses. Combining speed of construction with architectural beauty.",
-      features: ["Complete customization", "Speed of construction", "Sophisticated comfort"]
+      title: "Container Offices",
+      description: "Modern container offices with full amenities and sleek design.",
+      features: ["Modular setup", "Climate-controlled", "Professional look"],
+      buttonText: "Buy Container Office"
+    },
+    {
+      icon: <Home size={40} />,
+      title: "Container Café",
+      description: "Trendy container cafés crafted for style and mobility.",
+      features: ["Elegant design", "Fast setup", "Easy to relocate"],
+      buttonText: "Buy Container Café"
     },
     {
       icon: <Settings size={40} />,
-      title: "PEB Sheds",
-      description: "Our Pre-Engineered Building (PEB) sheds are precision-engineered for strength, scalability, and cost-effectiveness. Perfect for warehouses, factories, workshops.",
-      features: ["Wide column-free spans", "Rapid assembly", "Superior load-bearing capacity"]
+      title: "Rental Services",
+      description: "Flexible portable cabin rentals for worksites and events.",
+      features: ["Short or long term", "Delivery included", "Maintenance support"],
+      buttonText: "Book Rental Cabin"
     }
   ];
 
   return (
-    <section id="products" ref={container} className="py-20 bg-primary-50">
+    <section
+      id="products"
+      className="py-20 bg-primary-50"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="products-title text-4xl md:text-5xl font-bold text-secondary-900 mb-6">
-            Our Products & <span className="text-secondary-700">Services</span>
+            Our <span className="text-secondary-700">Products</span>
           </h2>
           <p className="text-lg text-secondary-600 max-w-3xl mx-auto">
-            Discover our comprehensive range of modular infrastructure solutions designed to meet diverse industrial, commercial, residential, and agricultural needs.
+            We provide a full range of portable office solutions tailored to your unique requirements. From design to installation, we manage every step with precision, quality, and care.
+          </p>
+          <p className="text-lg text-secondary-600 max-w-3xl mx-auto mt-4">
+            Our products include portable cabins, container offices, prefab houses, security cabins, labour colonies, and container cafés, all designed for durability and quick setup. Each unit ensures comfort, strength, and custom finishes to meet your exact needs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product, index) => (
-            <div key={index} className="product-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-              <div className="flex items-start mb-6">
-                <div className="text-secondary-700 mr-4 flex-shrink-0">
-                  {product.icon}
-                </div>
-                <div>
-                  <h3 className="text-2xl font-semibold text-secondary-900 mb-3">
-                    {product.title}
-                  </h3>
-                  <p className="text-secondary-600 leading-relaxed">
-                    {product.description}
-                  </p>
-                </div>
+            <div
+              key={index}
+              className="product-card bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col"
+            >
+              {/* Icon */}
+              <div className="mb-6 inline-flex w-16 h-16 bg-secondary-700 rounded-lg items-center justify-center text-white">
+                {product.icon}
               </div>
-              
-              <ul className="space-y-2">
+
+              {/* Title */}
+              <h3 className="text-xl font-semibold text-secondary-900 mb-3">
+                {product.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-secondary-600 text-sm mb-6 flex-grow">
+                {product.description}
+              </p>
+
+              {/* Features */}
+              <ul className="space-y-2 mb-6">
                 {product.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-secondary-700">
-                    <div className="w-2 h-2 bg-secondary-700 rounded-full mr-3"></div>
+                  <li key={idx} className="flex items-center text-secondary-700 text-sm">
+                    <Check size={16} className="text-secondary-700 mr-2 flex-shrink-0" />
                     {feature}
                   </li>
                 ))}
               </ul>
+
+              {/* Button */}
+              <button className="w-full px-4 py-2 border-2 border-secondary-700 text-secondary-700 rounded-lg font-medium hover:bg-secondary-700 hover:text-white transition-all">
+                {product.buttonText}
+              </button>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 bg-secondary-700 text-primary-100 p-8 rounded-xl text-center">
-          <h3 className="text-2xl font-semibold mb-4">Custom Modular Solutions</h3>
-          <p className="text-lg mb-6">
-            We understand that every project is unique. That's why we offer flexible sizing, quick relocatability 
-            and fully scalable modular solutions tailored to your specific requirements.
-          </p>
-          <button className="px-8 py-3 bg-primary-100 text-secondary-700 rounded-full font-medium hover:bg-primary-200 transition-colors">
-            Get Custom Quote
+        {/* View All Products Button */}
+        <div className="mt-16 text-center">
+          <button
+            onClick={() => navigate('/products')}
+            className="px-8 py-4 bg-secondary-700 text-white rounded-lg font-semibold hover:bg-secondary-800 transition-colors text-lg shadow-lg hover:shadow-xl"
+          >
+            View All Products
           </button>
         </div>
       </div>
