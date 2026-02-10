@@ -11,6 +11,7 @@ import Footer from './components/layout/Footer';
 import Product from './pages/Product';
 import Navbar2 from './components/layout/Navbar2';
 import ScrollToTop from './utils/ScrollToTop';
+import WhatsAppButton from './utils/WhatsAppButton';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Footer />
               </>
             } />
+
             <Route path="/products" element={
               <>
               <Navbar2/>
@@ -40,6 +42,7 @@ function App() {
               </>
             } />
           </Routes>
+          <WhatsAppButton />
         </main>
       </SmoothScroll>
     </Router>

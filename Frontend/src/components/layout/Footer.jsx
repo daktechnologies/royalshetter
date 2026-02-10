@@ -80,22 +80,34 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-slate-900 font-bold mb-4 uppercase tracking-wider text-xs">Contact Us</h3>
-            <ul className="space-y-3">
-              <li className="flex items-center space-x-3 text-slate-600 text-sm cursor-pointer">
-                <Phone size={16} className="text-secondary-700" />
-                <span>+91 98765 43210</span>
-              </li>
-              <li className="flex items-center space-x-3 text-slate-600 text-sm cursor-pointer">
-                <Mail size={16} className="text-secondary-700" />
-                <span>contact@royalshelter.com</span>
-              </li>
-              <li className="flex items-center space-x-3 text-slate-600 text-sm cursor-pointer">
-                <MapPin size={16} className="text-secondary-700" />
-                <span>123 Royal Street, City Center</span>
-              </li>
-            </ul>
-          </div>
+  <h3 className="mb-4 text-xs font-bold tracking-wider uppercase text-slate-900">
+    Contact Us
+  </h3>
+
+  <ul className="space-y-4">
+    {/* Phone */}
+    <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
+      <Phone size={18} className="mt-0.5 shrink-0 text-secondary-700" />
+      <span>+91 95943 53773 | +91 80702 23959</span>
+    </li>
+
+    {/* Email */}
+    <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
+      <Mail size={18} className="mt-0.5 shrink-0 text-secondary-700" />
+      <span>royalsheltersolutions@gmail.com</span>
+    </li>
+
+    {/* Address */}
+    <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
+      <MapPin size={18} className="mt-1 shrink-0 text-secondary-700" />
+      <span className="leading-relaxed">
+        Powari, Opp. Pagariya Industries, Nagpur–Jabalpur Road,  
+        Kapsi, Kamptee, Nagpur, Maharashtra – 440035
+      </span>
+    </li>
+  </ul>
+</div>
+
         </div>
 
         {/* Social Icons & Copyright */}

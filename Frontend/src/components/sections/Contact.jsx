@@ -7,7 +7,7 @@ const Contact = () => {
   const container = useRef();
 
   useGSAP(() => {
-    const tl = gsap.timeline({ 
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
         start: "top 80%",
@@ -38,17 +38,16 @@ const Contact = () => {
           <div className="contact-info">
             <div className="bg-white p-8 rounded-xl shadow-lg">
               <h3 className="text-2xl font-semibold text-secondary-900 mb-6">Royal Shelter Solutions</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start">
                   <MapPin size={20} className="text-secondary-700 mr-3 mt-1 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-secondary-900">Address</p>
                     <p className="text-secondary-600">
-                      3391/03, Amina Manzil, Hakeem Seth Compound,<br />
-                      Qasimpura Road, Salamatpura,<br />
-                      Bhiwandi, Thane – 421302,<br />
-                      Maharashtra, India
+                      Powari, Opp. Pagariya Industries,<br />
+                      Nagpur–Jabalpur Road, Kapsi, Kamptee,<br />
+                      Nagpur, Maharashtra – 440035
                     </p>
                   </div>
                 </div>
@@ -57,7 +56,7 @@ const Contact = () => {
                   <Phone size={20} className="text-secondary-700 mr-3 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-secondary-900">Mobile</p>
-                    <p className="text-secondary-600">+91-8044464777 | +91-9372345012</p>
+                    <p className="text-secondary-600">+91 95943 53773 | +91 80702 23959</p>
                   </div>
                 </div>
 
@@ -73,9 +72,9 @@ const Contact = () => {
                   <Globe size={20} className="text-secondary-700 mr-3 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-secondary-900">Website</p>
-                    <a 
-                      href="https://www.indiamart.com/royal-shelter-solutions" 
-                      target="_blank" 
+                    <a
+                      href="https://www.indiamart.com/royal-shelter-solutions"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-secondary-600 hover:text-secondary-700 transition-colors"
                     >
@@ -91,7 +90,7 @@ const Contact = () => {
           <div className="contact-form">
             <div className="bg-white p-8 rounded-xl shadow-lg">
               <h3 className="text-2xl font-semibold text-secondary-900 mb-6">Send us a Message</h3>
-              
+
               <form className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-secondary-700 mb-2">
