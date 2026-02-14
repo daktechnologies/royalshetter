@@ -1,5 +1,6 @@
 import { useRef } from 'react';
-import { MessageCircle } from 'lucide-react'; // Using Lucide icon as requested
+// import { MessageCircle } from 'lucide-react'; // Using Lucide icon as requested
+import { FaWhatsapp } from "react-icons/fa";
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
@@ -17,7 +18,7 @@ export default function WhatsAppButton() {
     // Initial entrance animation
     tl.fromTo(buttonRef.current,
       { scale: 0, opacity: 0, y: 0 },
-      { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)", delay: 1 }
+      { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }
     )
       // Continuous floating animation
       .to(buttonRef.current, {
@@ -57,7 +58,7 @@ export default function WhatsAppButton() {
       onMouseLeave={handleMouseLeave}
       aria-label="Chat on WhatsApp"
     >
-      <MessageCircle size={32} strokeWidth={2.5} />
+      <FaWhatsapp size={32} className="text-white" />
     </a>
   );
 }

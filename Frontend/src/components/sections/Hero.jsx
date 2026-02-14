@@ -139,6 +139,12 @@ const Hero = () => {
     }
   }, []);
 
+
+  // Updated to one of the numbers provided in the contact update
+  const phoneNumber = "919594353773";
+  const message = "Hello Royal Shelter Solutions, I would like to inquire about your services.";
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
   return (
     <section
       id="home"
@@ -167,8 +173,9 @@ const Hero = () => {
 
       {/* CONTENT */}
       <div className="text-center px-4 flex flex-col items-center">
-        <div className="hero-icon mb-8 p-4 bg-secondary-700 rounded-full">
-          <Building2 size={48} className="text-white" />
+        <div className="hero-icon mb-2 p-2 rounded-full">
+          {/* <Building2 size={48} className="text-white" />  */}
+          <img src="/images/zaid-logo.PNG" alt="" sizes='16' />
         </div>
 
         <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6">
@@ -188,12 +195,17 @@ const Hero = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-10">
-          <button className="hero-btn px-8 py-4 bg-secondary-700 text-white rounded-full flex items-center gap-2">
+          <button className="hero-btn px-8 py-4 bg-secondary-700 text-white rounded-full flex items-center gap-2" href="#projects" onClick={() => scrollToSection("projects")}>
             Explore Our Solutions <ArrowRight size={20} />
           </button>
-          <button className="hero-btn px-8 py-4 border-2 border-secondary-300 text-white rounded-full hover:bg-secondary-700">
+          <a className="hero-btn px-8 py-4 border-2 border-secondary-300 text-white rounded-full hover:bg-secondary-700"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
+          >
             Get Quote
-          </button>
+          </a>
         </div>
       </div>
     </section>
