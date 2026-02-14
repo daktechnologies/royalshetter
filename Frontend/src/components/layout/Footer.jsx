@@ -146,7 +146,7 @@ const Footer = () => {
           </p>
 
           <a href='https://daktechno.com/' className="text-slate-500 text-xs hover:text-secondary-700 transition-colors" target="_blank" rel="noopener noreferrer">
-            Developed by Dak Technology
+            Developed by DAK Technologies
           </a>
           <div className="flex space-x-6">
             <a href="#" className="text-slate-400 hover:text-secondary-700 transition-colors">
