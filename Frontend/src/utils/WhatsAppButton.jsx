@@ -11,42 +11,40 @@ export default function WhatsAppButton() {
   const message = "Hello Royal Shelter Solutions, I would like to inquire about your services.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-  useGSAP(() => {
+  const { contextSafe } = useGSAP(() => {
+    const tl = gsap.timeline();
+
     // Initial entrance animation
-    gsap.from(buttonRef.current, {
-      scale: 0,
-      opacity: 0,
-      duration: 0.5,
-      ease: "back.out(1.7)",
-      delay: 1 // Delay to show after page load
-    });
+    tl.fromTo(buttonRef.current,
+      { scale: 0, opacity: 0, y: 0 },
+      { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)", delay: 1 }
+    )
+      // Continuous floating animation
+      .to(buttonRef.current, {
+        y: -5,
+        duration: 1.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
 
-    // Continuous floating animation
-    gsap.to(buttonRef.current, {
-      y: -5,
-      duration: 1.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
-    });
+  }, { scope: buttonRef, revertOnUpdate: true });
 
-  }, { scope: buttonRef });
-
-  const handleMouseEnter = () => {
+  const handleMouseEnter = contextSafe(() => {
     gsap.to(buttonRef.current, {
       scale: 1.1,
       duration: 0.3,
       ease: "power2.out"
     });
-  };
+  });
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = contextSafe(() => {
     gsap.to(buttonRef.current, {
       scale: 1,
       duration: 0.3,
       ease: "power2.out"
     });
-  };
+  });
 
   return (
     <a

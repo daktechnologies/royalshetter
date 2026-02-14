@@ -3,6 +3,10 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Phone, Mail, Globe, MapPin } from 'lucide-react';
 
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 const Contact = () => {
   const container = useRef();
 
@@ -16,10 +20,21 @@ const Contact = () => {
       }
     });
 
-    tl.from(".contact-title", { y: 50, opacity: 0, duration: 0.8 })
-      .from(".contact-info", { y: 30, opacity: 0, duration: 0.6 }, "-=0.4")
-      .from(".contact-form", { scale: 0.95, opacity: 0, duration: 0.5 }, "-=0.3");
-  }, { scope: container });
+    tl.fromTo(".contact-title",
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8 }
+    )
+      .fromTo(".contact-info",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6 },
+        "-=0.4"
+      )
+      .fromTo(".contact-form",
+        { scale: 0.95, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.5 },
+        "-=0.3"
+      );
+  }, { scope: container, revertOnUpdate: true });
 
   return (
     <section id="contact" ref={container} className="py-20 bg-primary-50 scroll-mt-24">

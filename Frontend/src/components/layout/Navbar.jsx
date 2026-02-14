@@ -1,15 +1,50 @@
 
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "../../utils/cn";
 import scrollToSection from "../../utils/scrollToSection";
 import useScrollSpy from "../../hooks/useScrollSpy";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 
 const Navbar = () => {
+  const navRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // useGSAP(() => {
+  //   const tl = gsap.timeline();
+  //   tl.fromTo(".nav-logo",
+  //     { y: -50, opacity: 0 },
+  //     { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+  //   )
+  //     .fromTo(".nav-item",
+  //       { y: -20, opacity: 0 },
+  //       { y: 0, opacity: 1, duration: 0.5, stagger: 0.1 },
+  //       "-=0.5"
+  //     );
+  // }, []);
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.from(".nav-logo", {
+      y: -40,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out"
+    })
+      .from(".nav-item", {
+        y: -15,
+        opacity: 0,
+        duration: 0.4,
+        stagger: 0.08,
+        clearProps: "all"
+      }, "-=0.4");
+  }, { scope: navRef });
+
 
   const navItems = [
     { name: "Home", href: "#home" },
@@ -36,6 +71,7 @@ const Navbar = () => {
 
   return (
     <nav
+      ref={navRef}
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
         scrolled || isOpen
@@ -50,7 +86,7 @@ const Navbar = () => {
           {/* Logo */}
           <a
             href="#home"
-            className="flex items-center space-x-2"
+            className="nav-logo flex items-center space-x-2"
             onClick={(e) => {
               if (window.location.pathname === "/") {
                 e.preventDefault();
@@ -59,17 +95,17 @@ const Navbar = () => {
             }}
           >
             {scrolled || isOpen ? (
-            <img
-              src="/images/logo.png"
-              alt="Royal Shelter Solutions"
-              className="h-36 w-auto mt-3"
-            />
-          ) : (
-            <img
-              src="/images/zaid-bg.png"
-              alt="Royal Shelter Solutions"
-              className="h-36 w-auto mt-3"
-            />
+              <img
+                src="/images/logo.png"
+                alt="Royal Shelter Solutions"
+                className="h-36 w-auto mt-3"
+              />
+            ) : (
+              <img
+                src="/images/zaid-bg.png"
+                alt="Royal Shelter Solutions"
+                className="h-36 w-auto mt-3"
+              />
             )}
           </a>
           {/* Desktop Navigation */}
@@ -80,7 +116,7 @@ const Navbar = () => {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "relative group px-4 py-2 text-sm font-semibold transition-all duration-300",
+                    "nav-item relative group px-4 py-2 text-sm font-semibold transition-all duration-300",
                     activeSection === item.href.replace("#", "")
                       ? "text-secondary-600"
                       : "text-inherit hover:text-secondary-600"

@@ -1,8 +1,37 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const Footer = () => {
+  const container = useRef();
   const currentYear = new Date().getFullYear();
+
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container.current,
+        start: "top 95%",
+        once: true
+      }
+    });
+
+    tl.from(".footer-col", {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2
+    })
+      .from(".footer-bottom", {
+        y: 20,
+        opacity: 0,
+        duration: 0.6
+      }, "-=0.4");
+  }, { scope: container });
 
   const footerLinks = [
     { name: 'Home', href: '#home' },
@@ -12,7 +41,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-white border-t border-gray-100 pt-12 pb-8">
+    <footer ref={container} className="bg-white border-t border-gray-100 pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
 
@@ -29,7 +58,7 @@ const Footer = () => {
           </div> */}
 
           {/* Brand Section */}
-          <div className="flex flex-col items-start">
+          <div className="footer-col flex flex-col items-start">
             {/* Logo Section */}
             <a
               href="#home"
@@ -61,7 +90,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links with Hover Effect */}
-          <div>
+          <div className="footer-col">
             <h3 className="text-slate-900 font-bold mb-4 uppercase tracking-wider text-xs">Quick Links</h3>
             <ul className="space-y-2">
               {footerLinks.map((link) => (
@@ -79,39 +108,46 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
-  <h3 className="mb-4 text-xs font-bold tracking-wider uppercase text-slate-900">
-    Contact Us
-  </h3>
+          <div className="footer-col">
+            <h3 className="mb-4 text-xs font-bold tracking-wider uppercase text-slate-900">
+              Contact Us
+            </h3>
 
-  <ul className="space-y-4">
-    {/* Phone */}
-    <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
-      <Phone size={18} className="mt-0.5 shrink-0 text-secondary-700" />
-      <span>+91 95943 53773 | +91 80702 23959</span>
-    </li>
+            <ul className="space-y-4">
+              {/* Phone */}
+              <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
+                <Phone size={18} className="mt-0.5 shrink-0 text-secondary-700" />
+                <span>+91 95943 53773 | +91 80702 23959</span>
+              </li>
 
-    {/* Email */}
-    <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
-      <Mail size={18} className="mt-0.5 shrink-0 text-secondary-700" />
-      <span>royalsheltersolutions@gmail.com</span>
-    </li>
+              {/* Email */}
+              <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
+                <Mail size={18} className="mt-0.5 shrink-0 text-secondary-700" />
+                <span>royalsheltersolutions@gmail.com</span>
+              </li>
 
-    {/* Address */}
-    <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
-      <MapPin size={18} className="mt-1 shrink-0 text-secondary-700" />
-      <span className="leading-relaxed">
-        Powari, Opp. Pagariya Industries, Nagpur–Jabalpur Road,  
-        Kapsi, Kamptee, Nagpur, Maharashtra – 440035
-      </span>
-    </li>
-  </ul>
-</div>
+              {/* Address */}
+              <li className="flex items-start gap-3 text-sm text-slate-600 cursor-pointer">
+                <MapPin size={18} className="mt-1 shrink-0 text-secondary-700" />
+                <span className="leading-relaxed">
+                  Powari, Opp. Pagariya Industries, Nagpur–Jabalpur Road,
+                  Kapsi, Kamptee, Nagpur, Maharashtra – 440035
+                </span>
+              </li>
+            </ul>
+          </div>
 
         </div>
 
         {/* Social Icons & Copyright */}
-        <div className="border-t border-gray-400 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div className="footer-bottom border-t border-gray-400 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <p className="text-slate-500 text-xs">
+            © {currentYear} Royal Shelter. All rights reserved.
+          </p>
+
+          <a href='https://daktechno.com/' className="text-slate-500 text-xs hover:text-secondary-700 transition-colors" target="_blank" rel="noopener noreferrer">
+            Developed by Dak Technology
+          </a>
           <div className="flex space-x-6">
             <a href="#" className="text-slate-400 hover:text-secondary-700 transition-colors">
               <Facebook size={20} />
@@ -123,12 +159,7 @@ const Footer = () => {
               <Twitter size={20} />
             </a>
           </div>
-          <p className="text-slate-500 text-xs">
-            © {currentYear} Royal Shelter. All rights reserved.
-          </p>
-          <a href='https://daktechno.com/' className="text-slate-500 text-xs hover:text-secondary-700 transition-colors">
-            Developed by Dak Technology
-          </a>
+          
         </div>
       </div>
     </footer>

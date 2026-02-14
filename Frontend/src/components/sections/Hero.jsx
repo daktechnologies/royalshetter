@@ -27,17 +27,17 @@
 //       <div className="hero-icon mb-8 p-4 bg-secondary-700 rounded-full">
 //         <Building2 size={48} className="text-primary-100" />
 //       </div>
-      
+
 //       <h1 className="hero-title display-text text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-center mb-6">
 //         Royal <span className="text-secondary-700">Shelter</span>
 //         <br />
 //         <span className="text-3xl md:text-4xl lg:text-5xl font-heading font-normal text-secondary-600">Solutions</span>
 //       </h1>
-      
+
 //       <p className="hero-sub text-secondary-700 mt-6 text-lg md:text-xl max-w-3xl text-center leading-relaxed px-4 font-medium">
 //         Engineering Excellence in Modular Infrastructure
 //       </p>
-      
+
 //       <p className="hero-sub text-secondary-600 mt-4 text-base md:text-lg max-w-2xl text-center leading-relaxed px-4">
 //         Delivering innovative and sustainable infrastructure solutions that redefine standards of quality, efficiency, and comfort across India.
 //       </p>
@@ -89,20 +89,28 @@ const Hero = () => {
 
   /* HERO TEXT ANIMATION */
   useGSAP(() => {
-    const container = document.querySelector('#home');
-
-    if (!container) {
-      console.error("GSAP target '#home' not found. Ensure the element is rendered.");
-      return;
-    }
-
     const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-    tl.from('.hero-title', { y: 100, opacity: 0, duration: 1 })
-      .from('.hero-sub', { opacity: 0, y: 20, duration: 0.8 }, '-=0.5')
-      .from('.hero-btn', { scale: 0.85, opacity: 0, duration: 0.5 }, '-=0.3')
-      .from('.hero-icon', { scale: 0, rotation: 180, duration: 0.8 }, '-=0.2');
-  }, { scope: container });
+    tl.fromTo('.hero-title',
+      { y: 100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1 }
+    )
+      .fromTo('.hero-sub',
+        { y: 20, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8 },
+        '-=0.5'
+      )
+      .fromTo('.hero-btn',
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.5 },
+        '-=0.3'
+      )
+      .fromTo('.hero-icon',
+        { scale: 0, rotation: 180 },
+        { scale: 1, rotation: 0, duration: 0.8 },
+        '-=0.2'
+      );
+  }, { scope: container, revertOnUpdate: true });
 
   /* AUTO SLIDE */
   useEffect(() => {
@@ -126,10 +134,10 @@ const Hero = () => {
   }, [index]);
 
   useEffect(() => {
-  if (window.location.hash) {
-    scrollToSection(window.location.hash.replace("#", ""));
-  }
-}, []);
+    if (window.location.hash) {
+      scrollToSection(window.location.hash.replace("#", ""));
+    }
+  }, []);
 
   return (
     <section

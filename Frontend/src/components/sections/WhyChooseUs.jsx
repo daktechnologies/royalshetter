@@ -1,8 +1,15 @@
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Star, MapPin, Award, Settings, Users } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const WhyChooseUs = () => {
   const navigate = useNavigate();
+  const container = useRef();
 
   const features = [
     {
@@ -37,8 +44,35 @@ const WhyChooseUs = () => {
     }
   ];
 
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container.current,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    tl.fromTo(".why-title",
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8 }
+    )
+      .fromTo(".why-feature",
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
+        "-=0.4"
+      )
+      .fromTo(".why-clients",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8 },
+        "-=0.2"
+      );
+
+  }, { scope: container, revertOnUpdate: true });
+
   return (
-    <section id="why-choose-us" className="py-20 bg-white scroll-mt-24">
+    <section ref={container} id="why-choose-us" className="py-20 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="why-title text-4xl md:text-5xl font-bold text-secondary-900 mb-6">
@@ -65,9 +99,9 @@ const WhyChooseUs = () => {
         <div className="why-clients bg-secondary-700 text-primary-100 p-8 rounded-xl">
           <h3 className="text-2xl font-semibold mb-6 text-center">Our Client Portfolio</h3>
           <p className="text-lg leading-relaxed mb-6 text-center">
-            Royal Shelter Solutions has earned the trust of leading corporations, construction firms, 
-            agricultural enterprises, educational institutions, and government organizations across India. 
-            Our modular solutions have enhanced operational efficiency on project sites, improved comfort 
+            Royal Shelter Solutions has earned the trust of leading corporations, construction firms,
+            agricultural enterprises, educational institutions, and government organizations across India.
+            Our modular solutions have enhanced operational efficiency on project sites, improved comfort
             and safety for staff, and provided dependable infrastructure in challenging and remote environments.
           </p>
           <p className="text-center text-white font-semibold">

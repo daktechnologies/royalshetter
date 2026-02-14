@@ -28,8 +28,8 @@ const Gallery = () => {
   ];
 
   const categories = [
-    "Labor Shelters",   
-    "Prefab Labor Camps", 
+    "Labor Shelters",
+    "Prefab Labor Camps",
     "Prefab Hutments",
     "All Projects"
   ];
@@ -76,7 +76,7 @@ const Gallery = () => {
     // Check if container exists to avoid errors
     if (!container.current) return;
 
-    const tl = gsap.timeline({ 
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container.current,
         start: "top 85%", // Thoda late start karein taaki user ko animation dikhe
@@ -85,38 +85,38 @@ const Gallery = () => {
     });
 
     // Pehle se hidden classes ko animate karein
-    tl.fromTo(".gallery-title", 
-      { y: 50, opacity: 0 }, 
+    tl.fromTo(".gallery-title",
+      { y: 50, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.8 }
     )
-    .fromTo(".gallery-subtitle", 
-      { y: 30, opacity: 0 }, 
-      { y: 0, opacity: 1, duration: 0.6 }, 
-      "-=0.4"
-    )
-    .fromTo(".gallery-image", 
-      { scale: 0.9, opacity: 0 }, 
-      { scale: 1, opacity: 1, duration: 0.5, stagger: 0.1, ease: "back.out(1.7)" }, 
-      "-=0.3"
-    );
+      .fromTo(".gallery-subtitle",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6 },
+        "-=0.4"
+      )
+      .fromTo(".gallery-image",
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.5, stagger: 0.1, ease: "back.out(1.7)" },
+        "-=0.3"
+      );
 
     // Cleanup for ScrollTrigger
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, { scope: container });
+  }, { scope: container, revertOnUpdate: true });
 
   return (
     <section id="gallery" ref={container} className="py-20 bg-white overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Title Section - Added opacity-0 to prevent blip */}
         <div className="text-center mb-16">
           <h2 className="gallery-title opacity-0 text-4xl md:text-5xl font-bold text-secondary-900 mb-6">
             Project <span className="text-secondary-700">Gallery</span>
           </h2>
           <p className="gallery-subtitle opacity-0 text-lg text-secondary-600 max-w-3xl mx-auto">
-            Explore our completed projects and see quality craftsmanship that defines Royal Shelter Solutions. 
+            Explore our completed projects and see quality craftsmanship that defines Royal Shelter Solutions.
             From labor shelters to prefab camps, each project showcases our commitment to excellence.
           </p>
         </div>
@@ -136,8 +136,8 @@ const Gallery = () => {
         {/* Gallery Grid - Enhanced with Premium Zoom */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {galleryImages.map((image, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="gallery-image opacity-0 group relative overflow-hidden rounded-xl shadow-lg cursor-zoom-in"
               onClick={() => openModal(image, index)}
             >
@@ -149,7 +149,7 @@ const Gallery = () => {
                   loading="lazy"
                 />
               </div>
-              
+
               {/* Modern Overlay with Blur */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                 <div className="bg-white/90 backdrop-blur-md p-3 rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -175,7 +175,7 @@ const Gallery = () => {
 
       {/* Enhanced Modal with Premium Zoom */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 cursor-zoom-out transition-all duration-300"
           onClick={closeModal}
         >
@@ -210,7 +210,7 @@ const Gallery = () => {
           </button>
 
           {/* Zoomed Image Container */}
-          <div 
+          <div
             className="relative max-w-5xl w-full transform transition-all duration-500 ease-out animate-in zoom-in-95"
             onClick={(e) => e.stopPropagation()} // Image click par band na ho
           >
@@ -219,7 +219,7 @@ const Gallery = () => {
               alt="Enlarged project view"
               className="w-full h-auto rounded-lg shadow-2xl border border-white/10"
             />
-            
+
             {/* Image Counter */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 backdrop-blur-sm px-4 py-2 rounded-full">
               <p className="text-white text-sm font-medium">
