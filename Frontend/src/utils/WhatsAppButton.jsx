@@ -32,6 +32,7 @@ export default function WhatsAppButton() {
   }, { scope: buttonRef, revertOnUpdate: true });
 
   const handleMouseEnter = contextSafe(() => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     gsap.to(buttonRef.current, {
       scale: 1.1,
       duration: 0.3,
@@ -40,6 +41,7 @@ export default function WhatsAppButton() {
   });
 
   const handleMouseLeave = contextSafe(() => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     gsap.to(buttonRef.current, {
       scale: 1,
       duration: 0.3,

@@ -14,9 +14,6 @@ const Product = () => {
   const [selectedStock, setSelectedStock] = useState('All');
   const [sortBy, setSortBy] = useState('Newest First');
   const [currentPage, setCurrentPage] = useState(1);
-  const [viewMode, setViewMode] = useState('grid');
-  const [favorites, setFavorites] = useState([]);
-  const [showFilters, setShowFilters] = useState(false);
   const itemsPerPage = 9;
 
   const [selectedProduct, setSelectedProduct] = useState(null);

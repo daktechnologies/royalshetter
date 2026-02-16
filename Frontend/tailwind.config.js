@@ -1,5 +1,7 @@
+import tailwindcssAnimate from "tailwindcss-animate";
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     darkMode: ["class"],
     content: [
     "./index.html",
@@ -73,15 +75,15 @@ module.exports = {
   		},
   		fontFamily: {
   			display: [
-  				'Outfit"',
+  				'Outfit',
   				'sans-serif'
   			],
   			body: [
-  				'Plus Jakarta Sans"',
+  				'Plus Jakarta Sans',
   				'sans-serif'
   			],
   			heading: [
-  				'Inter"',
+  				'Inter',
   				'sans-serif'
   			]
   		},
@@ -127,5 +129,5 @@ module.exports = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 }

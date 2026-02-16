@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -7,25 +7,25 @@ import { Image as ImageIcon, ZoomIn, X, ChevronLeft, ChevronRight } from 'lucide
 // Register Plugin
 gsap.registerPlugin(ScrollTrigger);
 
+const galleryImages = [
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1662_labor-shelters-1-7.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1674_labor-shelters-1-5.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1691_prefab-labor-camps-1-5.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1727_prefab-labor-camps-1-3.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1744_prefab-pabor-hutments-1-4.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1750_prefab-pabor-hutments-1-6.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1762_prefab-pabor-hutments-1-1.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1756_prefab-pabor-hutments-1-3.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1774_prefab-pabor-hutments-1-2.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1786_prefab-pabor-hutments-1-8.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1809_Prefab-Labor-Sheds-1-3.jpg&w=1920&q=75",
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1868_prefab-labor-colony-1-6.jpg&w=1920&q=75"
+];
+
 const Gallery = () => {
   const container = useRef();
   const [selectedImage, setSelectedImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const galleryImages = [
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1662_labor-shelters-1-7.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1674_labor-shelters-1-5.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1691_prefab-labor-camps-1-5.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1727_prefab-labor-camps-1-3.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1744_prefab-pabor-hutments-1-4.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1750_prefab-pabor-hutments-1-6.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1762_prefab-pabor-hutments-1-1.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1756_prefab-pabor-hutments-1-3.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1774_prefab-pabor-hutments-1-2.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1786_prefab-pabor-hutments-1-8.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1809_Prefab-Labor-Sheds-1-3.jpg&w=1920&q=75",
-    "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1868_prefab-labor-colony-1-6.jpg&w=1920&q=75"
-  ];
 
   const categories = [
     "Labor Shelters",
@@ -38,15 +38,21 @@ const Gallery = () => {
   const openModal = (image, index) => {
     setSelectedImage(image);
     setCurrentImageIndex(index);
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
   };
 
   const closeModal = () => {
     setSelectedImage(null);
-    document.body.style.overflow = 'auto'; // Restore scroll
   };
 
-  const navigateImage = (direction) => {
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = selectedImage ? 'hidden' : 'auto';
+    return () => {
+      document.body.style.overflow = 'auto'; // Cleanup on unmount
+    };
+  }, [selectedImage]);
+
+  const navigateImage = useCallback((direction) => {
     if (direction === 'next') {
       const nextIndex = (currentImageIndex + 1) % galleryImages.length;
       setCurrentImageIndex(nextIndex);
@@ -56,7 +62,7 @@ const Gallery = () => {
       setCurrentImageIndex(prevIndex);
       setSelectedImage(galleryImages[prevIndex]);
     }
-  };
+  }, [currentImageIndex]);
 
   // Keyboard Navigation
   useEffect(() => {
@@ -70,7 +76,7 @@ const Gallery = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImage, currentImageIndex]);
+  }, [selectedImage, currentImageIndex, navigateImage]);
 
   useGSAP(() => {
     // Check if container exists to avoid errors

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "../../utils/cn";
 import scrollToSection from "../../utils/scrollToSection";
@@ -9,7 +9,6 @@ import { useGSAP } from "@gsap/react";
 
 const Navbar2 = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,12 +58,6 @@ const Navbar2 = () => {
     navItems.map((item) => item.id),
     100
   );
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleNavClick = (e, sectionId) => {
     e.preventDefault();
