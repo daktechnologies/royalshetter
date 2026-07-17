@@ -18,7 +18,7 @@
 
 //   return (
 //     <section id="home">
-//     <DotGlobeHero 
+//     <DotGlobeHero
 //       ref={container}
 //       rotationSpeed={0.003}
 //       globeRadius={1.2}
@@ -57,15 +57,11 @@
 
 // export default Hero;
 
-
-
-
-
-import { useRef, useState, useEffect } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ArrowRight, Building2 } from 'lucide-react';
-import scrollToSection from '../../utils/scrollToSection';
+import { useRef, useState, useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ArrowRight, Building2 } from "lucide-react";
+import scrollToSection from "../../utils/scrollToSection";
 
 const galleryImages = [
   "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1662_labor-shelters-1-7.jpg&w=1920&q=75",
@@ -79,7 +75,7 @@ const galleryImages = [
   "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1774_prefab-pabor-hutments-1-2.jpg&w=1920&q=75",
   "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1786_prefab-pabor-hutments-1-8.jpg&w=1920&q=75",
   "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1809_Prefab-Labor-Sheds-1-3.jpg&w=1920&q=75",
-  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1868_prefab-labor-colony-1-6.jpg&w=1920&q=75"
+  "https://www.samanportable.com/_next/image?url=%2FGallery%2Fimgi_1868_prefab-labor-colony-1-6.jpg&w=1920&q=75",
 ];
 
 const Hero = () => {
@@ -88,29 +84,36 @@ const Hero = () => {
   const [index, setIndex] = useState(0);
 
   /* HERO TEXT ANIMATION */
-  useGSAP(() => {
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-    tl.fromTo('.hero-title',
-      { y: 100, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 }
-    )
-      .fromTo('.hero-sub',
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8 },
-        '-=0.5'
+      tl.fromTo(
+        ".hero-title",
+        { y: 100, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 },
       )
-      .fromTo('.hero-btn',
-        { scale: 0.85, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5 },
-        '-=0.3'
-      )
-      .fromTo('.hero-icon',
-        { scale: 0, rotation: 180 },
-        { scale: 1, rotation: 0, duration: 0.8 },
-        '-=0.2'
-      );
-  }, { scope: container, revertOnUpdate: true });
+        .fromTo(
+          ".hero-sub",
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8 },
+          "-=0.5",
+        )
+        .fromTo(
+          ".hero-btn",
+          { scale: 0.85, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.5 },
+          "-=0.3",
+        )
+        .fromTo(
+          ".hero-icon",
+          { scale: 0, rotation: 180 },
+          { scale: 1, rotation: 0, duration: 0.8 },
+          "-=0.2",
+        );
+    },
+    { scope: container, revertOnUpdate: true },
+  );
 
   /* AUTO SLIDE */
   useEffect(() => {
@@ -118,7 +121,7 @@ const Hero = () => {
       gsap.to(sliderRef.current, {
         xPercent: -(index + 1) * 100,
         duration: 1.2,
-        ease: 'power3.inOut',
+        ease: "power3.inOut",
         onComplete: () => {
           setIndex((prev) => (prev + 1) % galleryImages.length);
           if (sliderRef.current) {
@@ -139,10 +142,10 @@ const Hero = () => {
     }
   }, []);
 
-
   // Updated to one of the numbers provided in the contact update
   const phoneNumber = "919594353773";
-  const message = "Hello Royal Shelter Solutions, I would like to inquire about your services.";
+  const message =
+    "Hello Royal Shelter Solutions, I would like to inquire about your services.";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
@@ -172,10 +175,10 @@ const Hero = () => {
       </div>
 
       {/* CONTENT */}
-      <div className="text-center px-4 flex flex-col items-center">
+      <div className="text-center mt-11 pt-5 px-4 flex flex-col items-center">
         <div className="hero-icon mb-2 p-2 rounded-full">
           {/* <Building2 size={48} className="text-white" />  */}
-          <img src="/images/zaid-logo.PNG" alt="" sizes='16' />
+          <img src="/images/2.png" alt="Brand Logo" className="h-28 w-auto" />
         </div>
 
         <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6">
@@ -191,14 +194,20 @@ const Hero = () => {
         </p>
 
         <p className="hero-sub mt-3 text-base md:text-lg max-w-2xl text-secondary-200">
-          Delivering innovative and sustainable infrastructure solutions across India.
+          Delivering innovative and sustainable infrastructure solutions across
+          India.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-10">
-          <button className="hero-btn px-8 py-4 bg-secondary-700 text-white rounded-full flex items-center gap-2" href="#projects" onClick={() => scrollToSection("projects")}>
+          <button
+            className="hero-btn px-8 py-4 bg-secondary-700 text-white rounded-full flex items-center gap-2"
+            href="#projects"
+            onClick={() => scrollToSection("projects")}
+          >
             Explore Our Solutions <ArrowRight size={20} />
           </button>
-          <a className="hero-btn px-8 py-4 border-2 border-secondary-300 text-white rounded-full hover:bg-secondary-700"
+          <a
+            className="hero-btn px-8 py-4 border-2 border-secondary-300 text-white rounded-full hover:bg-secondary-700"
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"

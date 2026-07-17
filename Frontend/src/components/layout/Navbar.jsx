@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "../../utils/cn";
@@ -7,7 +5,6 @@ import scrollToSection from "../../utils/scrollToSection";
 import useScrollSpy from "../../hooks/useScrollSpy";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-
 
 const Navbar = () => {
   const navRef = useRef(null);
@@ -27,24 +24,29 @@ const Navbar = () => {
   //     );
   // }, []);
 
-  useGSAP(() => {
-    const tl = gsap.timeline();
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
 
-    tl.from(".nav-logo", {
-      y: -40,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power3.out"
-    })
-      .from(".nav-item", {
-        y: -15,
+      tl.from(".nav-logo", {
+        y: -40,
         opacity: 0,
-        duration: 0.4,
-        stagger: 0.08,
-        clearProps: "all"
-      }, "-=0.4");
-  }, { scope: navRef });
-
+        duration: 0.8,
+        ease: "power3.out",
+      }).from(
+        ".nav-item",
+        {
+          y: -15,
+          opacity: 0,
+          duration: 0.4,
+          stagger: 0.08,
+          clearProps: "all",
+        },
+        "-=0.4",
+      );
+    },
+    { scope: navRef },
+  );
 
   const navItems = [
     { name: "Home", href: "#home" },
@@ -57,7 +59,7 @@ const Navbar = () => {
 
   const activeSection = useScrollSpy(
     navItems.map((item) => item.href.replace("#", "")),
-    100
+    100,
   );
 
   useEffect(() => {
@@ -76,13 +78,11 @@ const Navbar = () => {
         "fixed top-0 w-full z-50 transition-all duration-300",
         scrolled || isOpen
           ? "bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm text-slate-900"
-          : "bg-transparent text-white"
+          : "bg-transparent text-white",
       )}
     >
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-
           {/* Logo */}
           <a
             href="#home"
@@ -96,15 +96,15 @@ const Navbar = () => {
           >
             {scrolled || isOpen ? (
               <img
-                src="/images/logo.png"
+                src="/images/2.png"
                 alt="Royal Shelter Solutions"
-                className="h-36 w-auto mt-3"
+                className="h-[55px] w-auto"
               />
             ) : (
               <img
-                src="/images/zaid-bg.png"
+                src="/images/2.png"
                 alt="Royal Shelter Solutions"
-                className="h-36 w-auto mt-3"
+                className="h-[55px] w-auto mt-3"
               />
             )}
           </a>
@@ -119,7 +119,7 @@ const Navbar = () => {
                     "nav-item relative group px-4 py-2 text-sm font-semibold transition-all duration-300",
                     activeSection === item.href.replace("#", "")
                       ? "text-secondary-600"
-                      : "text-inherit hover:text-secondary-600"
+                      : "text-inherit hover:text-secondary-600",
                   )}
                   onClick={(e) => {
                     e.preventDefault();
@@ -132,7 +132,7 @@ const Navbar = () => {
                       "absolute bottom-0 left-0 w-full h-0.5 bg-secondary-600 transition-transform duration-300 ease-out origin-left",
                       activeSection === item.href.replace("#", "")
                         ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100",
                     )}
                   />
                 </a>
@@ -158,7 +158,7 @@ const Navbar = () => {
             "md:hidden transition-all duration-300 ease-in-out overflow-hidden",
             isOpen
               ? "max-h-96 opacity-100 bg-white/95 backdrop-blur-md rounded-b-2xl shadow-xl border-t border-gray-100"
-              : "max-h-0 opacity-0"
+              : "max-h-0 opacity-0",
           )}
         >
           <div className="px-4 pt-4 pb-6 space-y-2">
